@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .myContainer {
+    @apply px-9;
+  }
+}
+
+.heroSection {
+  background-image: url("assets/imgs/batman.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: 1px;
+}
+
+.film {
+  background: rgb(251, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(251, 0, 0, 1) 0%,
+    rgba(35, 11, 16, 1) 100%
+  );
+}
+
+:root {
+  background: #000;
+}
+
+body{
+  scroll-behavior: smooth;
+}
