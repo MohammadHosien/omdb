@@ -4,7 +4,7 @@ export const filmElement = (item: FilmsType) => {
   const filmTitle = document.getElementById("filmTitle");
   const input = document.getElementById("search") as HTMLInputElement;
   const div = document.createElement("div");
-  div.className = "film p-3 rounded-xl hover:scale-50 tarnsition-all";
+  div.className = "film p-3 rounded-xl";
   //h1
   const h1 = document.createElement("h3");
   h1.className =

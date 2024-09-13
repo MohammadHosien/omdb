@@ -16,6 +16,11 @@
   background-position-y: 1px;
 }
 
+.active{
+  color: #ffff;
+  background:#6b1d15;
+}
+
 .film {
   background: rgb(251, 0, 0);
   background: radial-gradient(

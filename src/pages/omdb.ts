@@ -6,9 +6,9 @@ const omdb = async () => {
     const response = await fetch(urls.OmdbById(id));
     const film = await response.json();
 
-    document.getElementById("app")!.innerHTML = `<div class="myContainer">
+    document.getElementById("app")!.innerHTML = `<div class="myContainer pb-4">
     <div class="grid grid-cols-2 gap-3 text-white mt-5">
-      <img src=${film.Poster} alt="" class="w-full rounded-lg"/>
+      <img src=${film.Poster} alt="" class="w-[400px] h-[550px] rounded-lg"/>
       <div class="film py-1 px-4 rounded-xl">
          <h1 class="text-[30] font-[500] text-center">${film.Title}</h1>
          <h4 class="mt-11">Director : ${film.Director}</h4>
@@ -21,20 +21,35 @@ const omdb = async () => {
          <h4 class="mt-4">Runtime : ${film.Runtime}</h4>
       </div>
     </div>
-     <div class="text-center text-white mt-5">
+    <h4 class="text-[25px] font-[500] text-center text-white mt-5">rating</h4>
+ 
+        <div class="text-white flex flex-col gap-5 mt-5 justify-between text-center">
+                ${
+                  film.Ratings[0]
+                    ? `<p class="film w-fit py-1 px-3 rounded-lg">${film.Ratings[0].Source} : ${film.Ratings[0].Value}</p>`
+                    : ""
+                }
+                ${
+                  film.Ratings[1]
+                    ? `<p class="film w-fit py-1 px-3 rounded-lg">${film.Ratings[1].Source} : ${film.Ratings[1].Value}</p>`
+                    : ""
+                }
+                ${
+                  film.Ratings[2]
+                    ? `<p class="film w-fit py-1 px-3 rounded-lg">${film.Ratings[2].Source} : ${film.Ratings[2].Value}</p>`
+                    : ""
+                }   
+        </div>    
+    <div class="text-center rounded-xl px-6 film py-4 text-white mt-5">
         <h4 class="text-[25px] font-[500] text-center text-white mt-5">Plot</h4>
          ${film.Plot}
       </div>
-      <h4 class="text-[25px] font-[500] text-center text-white mt-5">rating</h4>
-      <div class="flex flex-wrap text-white mt-5 justify-between text-center">
-         <p class="bg-primary-base py-1 px-3 rounded-lg">${film &&film.Ratings[0].Source} : ${film.Ratings[0].Value}</p>
-         <p class="bg-primary-base py-1 px-3 rounded-lg">${film && film.Ratings[1].Source} : ${film.Ratings[1].Value}</p>
-         <p class="bg-primary-base py-1 px-3 rounded-lg">${film &&film.Ratings[2].Source} : ${film.Ratings[2].Value}</p>
-      </div>
-    <button id="button" class="text-white py-2 px-6 mt-6 block mx-auto bg-primary-base rounded-xl">back</button>
+
+      
+    <button id="back" class="text-white py-2 px-6 mt-6 block mx-auto bg-primary-base rounded-xl">back</button>
     </div>`;
   }
-  const button = document.getElementById("button");
+  const button = document.getElementById("back");
   button?.addEventListener("click", () => {
     location.pathname = "/";
   });
