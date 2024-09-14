@@ -21,9 +21,18 @@ export const getfilms = async (page?: number) => {
   loading.innerHTML = "loading";
   document.getElementById("films")!.innerHTML = "";
   const input = document.getElementById("search") as HTMLInputElement;
+  input.disabled = true;
+  if (!page) {
+    setTimeout(() => {
+      document
+        .getElementById("loading")
+        ?.scrollIntoView({ behavior: "smooth" }); //scroll to films
+    }, 300);
+  }
   const response = await fetch(urls.OdmBySearch(input.value, page));
   const filmData = await response.json();
   const searchedFilm: FilmsType[] = filmData.Search;
+  input.disabled = false;
   loading.innerHTML = "";
   loading.className = "";
   if (searchedFilm) {
@@ -33,11 +42,13 @@ export const getfilms = async (page?: number) => {
   } else {
     document.getElementById("films")!.innerHTML = "";
   }
-  setTimeout(() => {
-    document
-      .getElementById("filmTitle")
-      ?.scrollIntoView({ behavior: "smooth" }); //scroll to films
-  }, 300);
+  if (page) {
+    setTimeout(() => {
+      document
+        .getElementById("filmTitle")
+        ?.scrollIntoView({ behavior: "smooth" }); //scroll to films
+    }, 300);
+  }
 };
 
 export const searchFilm = async () => {

@@ -19,15 +19,17 @@ const setPagination = (totalFilms: number) => {
         paginationButton(i).addEventListener("click", () => {
           getfilms(i);
 
+          const button=document.getElementById(
+            i.toString()
+          ) as HTMLButtonElement
+
           let current = document.getElementsByClassName("active");
 
           if (current.length > 0) {
             current[0].className = current[0].className.replace(" active", "");
           }
 
-          document.getElementById(
-            i.toString()
-          )!.className = `${buttonClassName} active`;
+          button!.className = `${buttonClassName} active`;
 
           if (i === end) {
             document.getElementById("pagination")!.innerHTML = "";
@@ -36,9 +38,7 @@ const setPagination = (totalFilms: number) => {
               paginationItems(1, 1);
               elipsElemnts();
               paginationItems(totalPage - 4, totalPage);
-              document.getElementById(
-                i.toString()
-              )!.className = `${buttonClassName} active`;
+              button!.className = `${buttonClassName} active`;
               return;
             }
             paginationItems(1, 1);
@@ -46,9 +46,7 @@ const setPagination = (totalFilms: number) => {
             paginationItems(start + 2, end + 2);
             elipsElemnts();
             paginationItems(totalPage, totalPage);
-            document.getElementById(
-              i.toString()
-            )!.className = `${buttonClassName} active`;
+            button!.className = `${buttonClassName} active`;
           }
 
           if (i === start && i !== 1) {
@@ -65,9 +63,7 @@ const setPagination = (totalFilms: number) => {
             paginationItems(start - 2, end - 2);
             elipsElemnts();
             paginationItems(totalPage, totalPage);
-            document.getElementById(
-              i.toString()
-            )!.className = `${buttonClassName} active`;
+            button!.className = `${buttonClassName} active`;
           }
 
           if (i === 1) {
@@ -75,9 +71,10 @@ const setPagination = (totalFilms: number) => {
             paginationItems(1, 5);
             elipsElemnts();
             paginationItems(totalPage, totalPage);
-            document.getElementById(
-              i.toString()
-            )!.className = `${buttonClassName} active`;
+            button!.className = `${buttonClassName} active`;
+          }
+          if(document.getElementById(i.toString())?.className.includes('active')){
+            document.getElementById(i.toString())as HTMLButtonElement
           }
         });
       }
