@@ -2,8 +2,9 @@ import {
   buttonClassName,
   elipsElemnts,
   paginationButton,
-} from "./elements/paginationElement";
-import { getfilms } from "./film";
+} from "../../elements/paginationElement";
+import urls from "../../utils/url";
+import { getfilms } from "./setFilms";
 
 const setPagination = (totalFilms: number) => {
   const itemsPages = 10;
@@ -19,9 +20,9 @@ const setPagination = (totalFilms: number) => {
         paginationButton(i).addEventListener("click", () => {
           getfilms(i);
 
-          const button=document.getElementById(
+          const button = document.getElementById(
             i.toString()
-          ) as HTMLButtonElement
+          ) as HTMLButtonElement;
 
           let current = document.getElementsByClassName("active");
 
@@ -73,8 +74,10 @@ const setPagination = (totalFilms: number) => {
             paginationItems(totalPage, totalPage);
             button!.className = `${buttonClassName} active`;
           }
-          if(document.getElementById(i.toString())?.className.includes('active')){
-            document.getElementById(i.toString())as HTMLButtonElement
+          if (
+            document.getElementById(i.toString())?.className.includes("active")
+          ) {
+            document.getElementById(i.toString()) as HTMLButtonElement;
           }
         });
       }
@@ -82,10 +85,19 @@ const setPagination = (totalFilms: number) => {
     paginationItems(1, 5);
     elipsElemnts();
     paginationItems(totalPage, totalPage);
-    document.getElementById(
-      "1"
-    )!.className = `${buttonClassName} active`;
+    document.getElementById("1")!.className = `${buttonClassName} active`;
   }
+};
+
+export const pagination = async () => {
+  const input = document.getElementById("search") as HTMLInputElement;
+  input.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+      const response = await fetch(urls.OdmBySearch(input.value));
+      const filmData = await response.json();
+      setPagination(filmData.totalResults);
+    }
+  });
 };
 
 export default setPagination;

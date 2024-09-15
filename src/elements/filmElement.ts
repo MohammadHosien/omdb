@@ -38,7 +38,7 @@ export const filmElement = (item: FilmsType) => {
   div.appendChild(typeP);
   div.appendChild(yearP);
   div.addEventListener('click',()=>{
-    location.pathname=item.imdbID
+    location.pathname=`/film/${item.imdbID}`
   })
   document.getElementById("films")!.appendChild(div);
   //appendes

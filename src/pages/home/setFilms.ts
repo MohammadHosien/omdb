@@ -1,18 +1,8 @@
-import { filmElement } from "./elements/filmElement";
-import setPagination from "./pagination";
-import { FilmsType } from "./utils/type";
-import urls from "./utils/url";
+import { filmElement } from "../../elements/filmElement";
+import { FilmsType } from "../../utils/type";
+import urls from "../../utils/url";
 
-export const pagination = async () => {
-  const input = document.getElementById("search") as HTMLInputElement;
-  input.addEventListener("keydown", async (e) => {
-    if (e.key === "Enter") {
-      const response = await fetch(urls.OdmBySearch(input.value));
-      const filmData = await response.json();
-      setPagination(filmData.totalResults);
-    }
-  });
-};
+
 
 export const getfilms = async (page?: number) => {
   const loading = document.getElementById("loading")!;
@@ -51,7 +41,7 @@ export const getfilms = async (page?: number) => {
   }
 };
 
-export const searchFilm = async () => {
+export const searchFilms = async () => {
   try {
     const input = document.getElementById("search") as HTMLInputElement;
     input.addEventListener("keydown", async (e) => {

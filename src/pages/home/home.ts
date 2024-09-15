@@ -1,13 +1,18 @@
-import { pagination, searchFilm } from "../film";
-import omdb from "./omdb";
-import "../style.css";
+import { searchFilms } from "./setFilms";
+import { pagination } from "./setPagination";
+import "../../style.css";
+import oneFilm from "../film/oneFilm";
+import favorite from "../favorite/favorite";
 
 if (location.pathname === "/") {
   document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
    <header
-        class="flex bg-primary-glass px-3 backdrop-blur-xl py-3 top-0 drop-shadow-lg fixed w-full z-[100000]"
+        class="flex bg-primary-base items-center justify-between px-3 backdrop-blur-xl py-3 top-0 drop-shadow-lg fixed w-full z-[100000]"
       >
         <h4 class="text-[30px] font-[600] text-center text-white">filmilia</h4>
+        <div id="favorite" class="text-[18px] cursor-pointer text-center px-6 text-white">
+          favorites
+        </div>
       </header>
       <div class="h-screen pb-9 pt-20 myContainer">
       <div class=" heroSection  h-full flex flex-col gap-7 justify-center items-center w-full rounded-3xl mx-auto overflow-hidden">
@@ -23,8 +28,16 @@ if (location.pathname === "/") {
       <div id="pagination"></div>
   `;
   //add more java-script
-  searchFilm();
+  searchFilms();
   pagination();
+  document.getElementById("favorite")?.addEventListener("click", () => {
+    if (localStorage.getItem("favorite")) {
+      location.pathname = "/favorite";
+    }
+  });
 }
 
-omdb();
+//pages
+
+oneFilm();
+favorite();
